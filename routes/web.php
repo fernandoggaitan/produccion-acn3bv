@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\MascotaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,13 @@ Route::get('/categorias', [
     CategoriaController::class,
     'index'
 ])->name('categorias.index');
+
+Route::post('/categorias', [
+    CategoriaController::class,
+    'store'
+])->name('categorias.store');
+
+Route::resource('/mascotas', MascotaController::class);
 
 Auth::routes();
 
