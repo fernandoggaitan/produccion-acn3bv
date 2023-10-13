@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Mascota;
 use Illuminate\Http\Request;
 
+use App\Models\Categoria;
+
 class MascotaController extends Controller
 {
     /**
@@ -12,7 +14,10 @@ class MascotaController extends Controller
      */
     public function index()
     {
-        return 'Acá va la lista de mascotas';
+        $mascotas = Mascota::get();
+        return view('mascotas.index', [
+            'mascotas' => $mascotas
+        ]);
     }
 
     /**
@@ -20,7 +25,10 @@ class MascotaController extends Controller
      */
     public function create()
     {
-        //
+        $categorias = Categoria::orderBy('nombre')->get();
+        return view('mascotas.create', [
+            'categorias' => $categorias
+        ]);
     }
 
     /**
@@ -28,7 +36,14 @@ class MascotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Mascota::create([
+            'nombre' => $request->nombre,
+            'fecha_nacimiento' => $request->fecha_nacimiento,
+            'telefono' => $request->telefono,
+            'categoria_id' => $request->categoria_id,
+            'descripcion' => $request->descripcion,
+        ]);
+        return redirect()->route('mascotas.index');
     }
 
     /**
@@ -36,7 +51,9 @@ class MascotaController extends Controller
      */
     public function show(Mascota $mascota)
     {
-        //
+        return view('mascotas.show', [
+            'mascota' => $mascota
+        ]);
     }
 
     /**
@@ -44,7 +61,11 @@ class MascotaController extends Controller
      */
     public function edit(Mascota $mascota)
     {
-        //
+        $categorias = Categoria::orderBy('nombre')->get();
+        return view('mascotas.edit', [
+            'categorias' => $categorias,
+            'mascota' => $mascota
+        ]);
     }
 
     /**
@@ -52,7 +73,14 @@ class MascotaController extends Controller
      */
     public function update(Request $request, Mascota $mascota)
     {
-        //
+        $mascota->update([
+            'nombre' => $request->nombre,
+            'fecha_nacimiento' => $request->fecha_nacimiento,
+            'telefono' => $request->telefono,
+            'categoria_id' => $request->categoria_id,
+            'descripcion' => $request->descripcion,
+        ]);
+        return redirect()->route('mascotas.index');
     }
 
     /**

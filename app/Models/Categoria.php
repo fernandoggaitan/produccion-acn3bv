@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Mascota;
 
 class Categoria extends Model
 {
@@ -13,5 +14,10 @@ class Categoria extends Model
     //protected $table = 'categorias';
 
     protected $fillable = ['nombre', 'descripcion'];
+
+    public function mascotas()
+    {
+        return $this->hasMany(Mascota::class, 'categoria_id', 'id');
+    }
 
 }
