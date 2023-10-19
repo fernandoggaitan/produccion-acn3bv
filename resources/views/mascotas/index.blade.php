@@ -10,6 +10,10 @@
 
                     <div class="card-body">
 
+                        @if (Session('status'))
+                            <div class="alert alert-success"> {{ Session('status') }} </div>
+                        @endif
+
                         <a href="{{ route('mascotas.create') }}" class="btn btn-primary"> Agregar mascota </a>
 
                         <table class="table">
@@ -42,6 +46,8 @@
                                 @endif
                             </tbody>
                         </table>
+
+                        {{ $mascotas->links() }}
 
                     </div>
                 </div>

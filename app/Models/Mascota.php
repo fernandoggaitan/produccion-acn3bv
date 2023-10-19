@@ -14,7 +14,7 @@ class Mascota extends Model
 
     public function categoria()
     {
-        return $this->hasOne(Categoria::class, 'id', 'categoria_id');
+        return $this->belongsTo(Categoria::class);
     }
 
 }

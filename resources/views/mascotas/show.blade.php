@@ -12,7 +12,11 @@
                     <div class="card-footer">
                         <a href="{{ route('mascotas.index') }}" class="btn btn-primary"> Volver a mascotas </a>
                         <a href="{{ route('mascotas.edit', $mascota) }}" class="btn btn-success"> Editar </a>
-                        <a href="" class="btn btn-danger"> Eliminar </a>
+                        <form action="{{ route('mascotas.destroy', $mascota) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger"> Eliminar </button>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -14,7 +14,9 @@ class MascotaController extends Controller
      */
     public function index()
     {
-        $mascotas = Mascota::get();
+        $mascotas = Mascota::where('is_visible', true)
+            ->orderBy('nombre')
+            ->paginate(10);
         return view('mascotas.index', [
             'mascotas' => $mascotas
         ]);
@@ -36,6 +38,17 @@ class MascotaController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'nombre' => 'required|max:50',
+            'fecha_nacimiento' => 'required|date|before:tomorrow',
+            'telefono' => 'required|max:50',
+            'categoria_id' => 'required',
+            'descripcion' => 'required',
+        ], [
+            'nombre.required' => 'El nombre de la mascota es obligatorio'
+        ]);
+
         Mascota::create([
             'nombre' => $request->nombre,
             'fecha_nacimiento' => $request->fecha_nacimiento,
@@ -43,7 +56,9 @@ class MascotaController extends Controller
             'categoria_id' => $request->categoria_id,
             'descripcion' => $request->descripcion,
         ]);
-        return redirect()->route('mascotas.index');
+        return redirect()
+            ->route('mascotas.index')
+            ->with('status', 'La mascota se ha agregado correctamente');
     }
 
     /**
@@ -80,7 +95,9 @@ class MascotaController extends Controller
             'categoria_id' => $request->categoria_id,
             'descripcion' => $request->descripcion,
         ]);
-        return redirect()->route('mascotas.index');
+        return redirect()
+            ->route('mascotas.index')
+            ->with('status', 'La mascota se ha modificado correctamente');
     }
 
     /**
@@ -88,6 +105,12 @@ class MascotaController extends Controller
      */
     public function destroy(Mascota $mascota)
     {
-        //
+        //$mascota->delete();
+        $mascota->update([
+            'is_visible' => false
+        ]);
+        return redirect()
+            ->route('mascotas.index')
+            ->with('status', 'La mascota se ha eliminado correctamente');
     }
 }
