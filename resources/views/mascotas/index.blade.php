@@ -1,5 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.app-admin')
 
+@section('title', 'Lista de mascotas')
 
 @section('content')
     <div class="container">
@@ -14,7 +15,23 @@
                             <div class="alert alert-success"> {{ Session('status') }} </div>
                         @endif
 
-                        <a href="{{ route('mascotas.create') }}" class="btn btn-primary"> Agregar mascota </a>
+                        <form action="{{ route('mascotas.index') }}" method="GET" class="mb-5 p-3 border-bottom">
+                            <div class="mb-3">
+                                <input type="text" name="buscador" class="form-control" placeholder="Buscar por nombre de mascota o teléfono" value="{{ $buscador }}">
+                            </div>
+                            <button type="submit" class="btn btn-success"> 
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                Buscar 
+                            </button>
+                            <a href="{{ route('mascotas.index') }}" class="btn btn-primary"> 
+                                <i class="fa-solid fa-rotate-right"></i>
+                                Limpiar búsqueda 
+                            </a>
+                        </form>
+
+                        <div class="mb-3">
+                            <a href="{{ route('mascotas.create') }}" class="btn btn-primary"> Agregar mascota </a>
+                        </div>
 
                         <table class="table">
                             <thead>

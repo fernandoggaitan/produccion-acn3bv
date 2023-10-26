@@ -22,6 +22,7 @@ class MascotaFactory extends Factory
             'telefono' => fake()->phoneNumber(),
             'categoria_id' => fake()->numberBetween(1, 3),
             'descripcion' => fake()->word(),
+            'imagen' => fake()->imageUrl()
         ];
     }
 }

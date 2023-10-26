@@ -1,5 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.app-admin')
 
+@section('title', 'Mascota nueva')
 
 @section('content')
     <div class="container">
@@ -20,7 +21,7 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('mascotas.store') }}" method="POST">
+                        <form action="{{ route('mascotas.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label for="nombre" class="form-label"> Nombre </label>
@@ -44,6 +45,10 @@
                                         <option @selected( old('categoria_id') == $cat->id ) value="{{ $cat->id }}"> {{ $cat->nombre }} </option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="imagen" class="form-label"> Imagen </label>
+                                <input type="file" class="form-control" id="imagen" name="imagen">
                             </div>
                             <div class="mb-3">
                                 <label for="descripcion" class="form-label"> Descripción </label>

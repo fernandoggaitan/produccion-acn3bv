@@ -1,4 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.app-admin')
+
+@section('title', $mascota->nombre)
 
 @section('content')
     <div class="container">
@@ -6,7 +8,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ $mascota->nombre }}</div>
-                    <div class="card-body">
+                    <div class="card-body" style="min-height: 500px">
                         {{ $mascota->descripcion }}
                     </div>
                     <div class="card-footer">
@@ -15,7 +17,7 @@
                         <form action="{{ route('mascotas.destroy', $mascota) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger"> Eliminar </button>
+                            <button id="btn_eliminar_mascota" type="submit" class="btn btn-danger"> Eliminar </button>
                         </form>
                     </div>
                 </div>
@@ -23,8 +25,8 @@
         </div>
     </div>
 
-    <script src="/js/mascotas/show.js"></script>
-
-    @vite(['resources/js/mascotas/show.js'])
+    @vite([
+        'resources/js/admin/submit_eliminar_mascota.js', 
+    ]);
 
 @endsection

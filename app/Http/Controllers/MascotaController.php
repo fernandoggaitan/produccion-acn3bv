@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mascota;
 use Illuminate\Http\Request;
-
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Categoria;
 
 class MascotaController extends Controller
@@ -12,13 +12,21 @@ class MascotaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $mascotas = Mascota::where('is_visible', true)
+        ->when(
+            $request->buscador,
+            function (Builder $builder) use ($request) {
+                $builder->where('nombre', 'like', "%{$request->buscador}%")
+                    ->orWhere('telefono', 'like', "%{$request->buscador}%");
+            }
+        )
             ->orderBy('nombre')
             ->paginate(10);
         return view('mascotas.index', [
-            'mascotas' => $mascotas
+            'mascotas' => $mascotas,
+            'buscador' => $request->buscador
         ]);
     }
 
@@ -45,9 +53,14 @@ class MascotaController extends Controller
             'telefono' => 'required|max:50',
             'categoria_id' => 'required',
             'descripcion' => 'required',
+            'imagen' => 'required|mimes:jpg,png'
         ], [
             'nombre.required' => 'El nombre de la mascota es obligatorio'
         ]);
+
+        $imagen_nombre = $request->file('imagen')->getClientOriginalName();
+
+        $imagen = $request->file('imagen')->storeAs('mascotas', $imagen_nombre, 'public');
 
         Mascota::create([
             'nombre' => $request->nombre,
@@ -55,6 +68,7 @@ class MascotaController extends Controller
             'telefono' => $request->telefono,
             'categoria_id' => $request->categoria_id,
             'descripcion' => $request->descripcion,
+            'imagen' => $imagen
         ]);
         return redirect()
             ->route('mascotas.index')

@@ -1,5 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.app-admin')
 
+@section('title', 'Editar ' . $mascota->nombre)
 
 @section('content')
     <div class="container">
