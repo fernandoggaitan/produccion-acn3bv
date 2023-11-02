@@ -30,7 +30,10 @@
                         </form>
 
                         <div class="mb-3">
-                            <a href="{{ route('mascotas.create') }}" class="btn btn-primary"> Agregar mascota </a>
+                            <a href="{{ route('mascotas.create') }}" class="btn btn-primary"> 
+                                <i class="fa-solid fa-plus"></i>
+                                Agregar mascota 
+                            </a>
                         </div>
 
                         <table class="table">
@@ -40,7 +43,7 @@
                                     <th> Categoría </th>
                                     <th> Fecha de nacimiento </th>
                                     <th> Teléfono de contacto </th>
-                                    <th>  </th>
+                                    <th> Acciones </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,7 +55,20 @@
                                             <td> {{ $masc->fecha_nacimiento }} </td>
                                             <td> {{ $masc->telefono }} </td>
                                             <td> 
-                                                <a href="{{ route('mascotas.show', $masc) }}" class="btn btn-primary"> Ingresar </a>
+                                                <ul>
+                                                    <li class="mb-3">
+                                                        <a href="{{ asset('/storage/' . $masc->imagen) }}" target="_blank" class="btn btn-primary"> 
+                                                            <i class="fa-solid fa-photo-film"></i>
+                                                            Imagen
+                                                        </a>
+                                                    </li>
+                                                    <li class="mb-3">
+                                                        <a href="{{ route('mascotas.show', $masc) }}" class="btn btn-primary"> 
+                                                            <i class="fa-solid fa-eye"></i>
+                                                            Ingresar 
+                                                        </a>
+                                                    </li>
+                                                </ul>                                                
                                             </td>
                                         </tr>
                                     @endforeach
@@ -71,4 +87,5 @@
             </div>
         </div>
     </div>
+
 @endsection

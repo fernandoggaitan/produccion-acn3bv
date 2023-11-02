@@ -14,6 +14,7 @@ class MascotaController extends Controller
      */
     public function index(Request $request)
     {
+
         $mascotas = Mascota::where('is_visible', true)
         ->when(
             $request->buscador,
@@ -22,8 +23,9 @@ class MascotaController extends Controller
                     ->orWhere('telefono', 'like', "%{$request->buscador}%");
             }
         )
-            ->orderBy('nombre')
-            ->paginate(10);
+        ->orderBy('nombre')
+        ->paginate(10);
+
         return view('mascotas.index', [
             'mascotas' => $mascotas,
             'buscador' => $request->buscador
@@ -58,7 +60,7 @@ class MascotaController extends Controller
             'nombre.required' => 'El nombre de la mascota es obligatorio'
         ]);
 
-        $imagen_nombre = $request->file('imagen')->getClientOriginalName();
+        $imagen_nombre = time() . $request->file('imagen')->getClientOriginalName();
 
         $imagen = $request->file('imagen')->storeAs('mascotas', $imagen_nombre, 'public');
 
@@ -70,6 +72,7 @@ class MascotaController extends Controller
             'descripcion' => $request->descripcion,
             'imagen' => $imagen
         ]);
+
         return redirect()
             ->route('mascotas.index')
             ->with('status', 'La mascota se ha agregado correctamente');

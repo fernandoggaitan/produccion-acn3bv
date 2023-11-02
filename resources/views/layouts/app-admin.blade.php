@@ -21,10 +21,6 @@
         'resources/js/app.js'
     ])
 
-    <link rel="stylesheet" href="/css/style.css">
-
-    <script src="/js/scripts.js"></script>
-
 </head>
 
 <body>
@@ -94,6 +90,9 @@
         </footer>
 
     </div>
+
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
