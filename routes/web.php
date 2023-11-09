@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\MascotaController;
+use App\Http\Controllers\LangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,17 +21,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/categorias', [
-    CategoriaController::class,
-    'index'
-])->name('categorias.index');
+Route::middleware('lang_manager')->group(function(){
 
-Route::post('/categorias', [
-    CategoriaController::class,
-    'store'
-])->name('categorias.store');
+    Route::get('/lang/{locale}', [
+        LangController::class,
+        'change'
+    ])->name('lang');
 
-Route::resource('/mascotas', MascotaController::class);
+    Route::middleware('is_admin')->group(function(){
+    
+        Route::get('/categorias', [
+            CategoriaController::class,
+            'index'
+        ])->name('categorias.index');
+        
+        Route::post('/categorias', [
+            CategoriaController::class,
+            'store'
+        ])->name('categorias.store');
+        
+        Route::resource('/mascotas', MascotaController::class);
+    
+    });
+
+});
 
 Auth::routes();
 

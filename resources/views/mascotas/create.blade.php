@@ -55,8 +55,8 @@
                                 <textarea class="form-control" name="descripcion" id="descripcion" cols="30" rows="10"
                                     placeholder="Ingrese la descripción del producto">{{ old('descripcion') }}</textarea>
                             </div>
-                            <button type="submit" class="btn btn-success"> Agregar </button>
-                            <a href="{{ route('mascotas.index') }}" class="btn btn-danger"> Cancelar </a>
+                            <button type="submit" class="btn btn-success"> {{ __('pets.btn_add') }} </button>
+                            <a href="{{ route('mascotas.index') }}" class="btn btn-danger"> {{ __('pets.btn_cancel') }} </a>
                         </form>
 
                     </div>

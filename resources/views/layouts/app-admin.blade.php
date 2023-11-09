@@ -50,12 +50,14 @@
                             <li class="nav-item">
                                 <a class="nav-link" aria-current="page" href="{{ route('home') }}">Home</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('categorias.index') }}">Categorías</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('mascotas.index') }}">Mascotas</a>
-                            </li>
+                            @if (Auth::user()->is_admin)
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="{{ route('categorias.index') }}">Categorías</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="{{ route('mascotas.index') }}">Mascotas</a>
+                                </li>
+                            @endif                            
                             <li class="nav-item border-top">
                                 <a class="nav-link" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
@@ -65,6 +67,16 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Cambiar idioma
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{ route('lang', 'en') }}">English</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('lang', 'es') }}">Español</a></li>
+                                </ul>
                             </li>
                         </ul>
                     </div>

@@ -29,16 +29,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('home') }}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('categorias.index') }}">Categorías</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('mascotas.index') }}">Mascotas</a>
-                        </li>
+                    <ul class="navbar-nav me-auto">                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->

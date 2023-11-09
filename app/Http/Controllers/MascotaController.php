@@ -9,6 +9,7 @@ use App\Models\Categoria;
 
 class MascotaController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
@@ -56,8 +57,6 @@ class MascotaController extends Controller
             'categoria_id' => 'required',
             'descripcion' => 'required',
             'imagen' => 'required|mimes:jpg,png'
-        ], [
-            'nombre.required' => 'El nombre de la mascota es obligatorio'
         ]);
 
         $imagen_nombre = time() . $request->file('imagen')->getClientOriginalName();
