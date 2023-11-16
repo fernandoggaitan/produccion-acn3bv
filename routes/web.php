@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\MascotaController;
 use App\Http\Controllers\LangController;
+use App\Http\Controllers\ServicioController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,10 @@ Route::middleware('lang_manager')->group(function(){
         ])->name('categorias.store');
         
         Route::resource('/mascotas', MascotaController::class);
+
+        Route::resource('/servicios', ServicioController::class);
+
+        Route::resource('/cart', CartController::class)->except(['create', 'show', 'edit']);
     
     });
 

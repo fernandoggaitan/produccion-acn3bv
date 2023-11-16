@@ -88,4 +88,6 @@
         </div>
     </div>
 
+    @vite(['resources/js/admin/submit_eliminar_recurso.js'])
+
 @endsection

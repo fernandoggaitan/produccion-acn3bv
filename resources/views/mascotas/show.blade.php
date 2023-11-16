@@ -17,7 +17,7 @@
                         <form action="{{ route('mascotas.destroy', $mascota) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
-                            <button id="btn_eliminar_mascota" type="submit" class="btn btn-danger"> Eliminar </button>
+                            <button type="submit" class="btn btn-danger btn_eliminar_recurso"> Eliminar </button>
                         </form>
                     </div>
                 </div>
@@ -25,8 +25,6 @@
         </div>
     </div>
 
-    @vite([
-        'resources/js/admin/submit_eliminar_mascota.js', 
-    ]);
+    @vite(['resources/js/admin/submit_eliminar_recurso.js'])
 
 @endsection

@@ -57,6 +57,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="{{ route('mascotas.index') }}">Mascotas</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="{{ route('servicios.index') }}">Servicios</a>
+                                </li>
                             @endif                            
                             <li class="nav-item border-top">
                                 <a class="nav-link" href="{{ route('logout') }}"
